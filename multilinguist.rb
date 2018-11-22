@@ -52,3 +52,83 @@ class Multilinguist
     json_response['translationText']
   end
 end
+
+class MathGenius < Multilinguist
+
+  def initialize
+    super
+  end
+
+  def report_total(array)
+    return("The total is #{array.reduce(:+)}")
+  end
+
+  def get_odds(array)
+    output = []
+    array.each do |item|
+      if item % 2 != 0
+        output << item
+      end
+    end
+    return output
+  end
+
+
+end
+
+class Quote_collector
+
+  def initialize
+    super
+    @quotes = []
+    @topics = ["wisdom", "friendship"]
+  end
+
+  def add_quote(quote, topic)
+    @quotes << {:quote => quote, :topic => topic}
+  end
+
+  def give_random_quote(topic)
+    topic_quotes = []
+    @quotes.each do |item|
+      if item[:topic] == topic
+        topic_quotes << item[:quote]
+      end
+    end
+    return topic_quotes
+  end
+
+end
+
+class Third_class < Multilinguist
+
+  def initialize
+    super
+  end
+
+
+end
+
+
+
+me = MathGenius.new
+puts me.report_total([23,45,676,34,5778,4,23,5465]) # The total is 12048
+me.travel_to("India")
+puts me.report_total([6,3,6,68,455,4,467,57,4,534]) # है को कुल 1604
+me.travel_to("Italy")
+puts me.report_total([324,245,6,343647,686545]) # È Il totale 1030767
+puts '-------------'
+p me.get_odds([23,45,676,34,5778,4,23,5465])
+p me.get_odds([6,3,6,68,455,4,467,57,4,534]) 
+p me.get_odds([324,245,6,343647,686545])
+
+puts '-------------'
+me_again = Quote_collector.new
+me_again.add_quote("life is like a box of chocolates", "wisdom")
+me_again.add_quote("live long and prosper", "friendship")
+me_again.add_quote("The way that can be named is not the true way", "wisdom")
+me_again.add_quote("oh hai mark", "friendship")
+puts me_again.give_random_quote("wisdom")
+puts '-------------'
+puts me_again.give_random_quote("friendship")
+
